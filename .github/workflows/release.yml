@@ -1,6 +1,9 @@
 name: Release
 
 on:
+  push:
+    branches: [main]
+
   workflow_dispatch:
     inputs:
       version:
@@ -14,10 +17,34 @@ on:
           - major
 
 jobs:
-  release:
+  ci:
+    name: Build check
     runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: "npm"
+
+      - run: npm install
+      - run: npm run build
+
+      - name: Verify dist
+        run: |
+          test -f dist/nodes/N8nLogs/N8nLogs.node.js
+          test -f dist/credentials/N8nLogsApi.credentials.js
+
+  release:
+    name: Release & Publish
+    needs: ci
+    runs-on: ubuntu-latest
+    # Skip release on commits made by release-it itself
+    if: "!startsWith(github.event.head_commit.message, 'chore(release)')"
     permissions:
       contents: write
+
     steps:
       - uses: actions/checkout@v4
         with:
@@ -35,8 +62,17 @@ jobs:
 
       - run: npm install
 
+      - name: Determine version bump
+        id: bump
+        run: |
+          if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
+            echo "version=${{ inputs.version }}" >> $GITHUB_OUTPUT
+          else
+            echo "version=patch" >> $GITHUB_OUTPUT
+          fi
+
       - name: Release
-        run: npm run release -- ${{ inputs.version }} --ci
+        run: npm run release -- ${{ steps.bump.outputs.version }} --ci
         env:
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
