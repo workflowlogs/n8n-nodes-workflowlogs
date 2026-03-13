@@ -1,0 +1,44 @@
+{
+  "name": "n8n-nodes-n8nlogs",
+  "version": "0.1.0",
+  "description": "n8n community node for sending workflow logs (success/error) to n8nLogs monitoring platform",
+  "keywords": [
+    "n8n-community-node-package",
+    "n8n",
+    "logging",
+    "monitoring",
+    "error-tracking"
+  ],
+  "license": "MIT",
+  "author": {
+    "name": "n8nLogs"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/josephjoberno/n8n-nodes-n8nlogs"
+  },
+  "main": "dist/index.js",
+  "n8n": {
+    "n8nNodesApiVersion": 1,
+    "nodes": [
+      "dist/nodes/N8nLogs/N8nLogs.node.js"
+    ],
+    "credentials": [
+      "dist/credentials/N8nLogsApi.credentials.js"
+    ]
+  },
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsc --watch",
+    "lint": "eslint nodes/ credentials/ --ext .ts",
+    "prepublishOnly": "npm run build"
+  },
+  "devDependencies": {
+    "n8n-workflow": "*",
+    "typescript": "^5.7.0",
+    "@types/node": "^20.0.0"
+  },
+  "peerDependencies": {
+    "n8n-workflow": "*"
+  }
+}

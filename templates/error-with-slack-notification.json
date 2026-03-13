@@ -1,0 +1,91 @@
+{
+  "name": "Error Monitoring with n8nLogs + Slack Notification",
+  "nodes": [
+    {
+      "parameters": {},
+      "id": "b2c3d4e5-2222-4bbb-cccc-000000000001",
+      "name": "Error Trigger",
+      "type": "n8n-nodes-base.errorTrigger",
+      "typeVersion": 1,
+      "position": [250, 300]
+    },
+    {
+      "parameters": {
+        "logType": "ERROR",
+        "message": "={{$json.execution.error.message}}",
+        "additionalFields": {
+          "errorCode": "WORKFLOW_ERROR",
+          "workflowId": "={{$json.workflow.id}}",
+          "workflowName": "={{$json.workflow.name}}",
+          "executionId": "={{$json.execution.id}}",
+          "stackTrace": "={{$json.execution.error.stack}}",
+          "includeInputData": true
+        }
+      },
+      "id": "b2c3d4e5-2222-4bbb-cccc-000000000002",
+      "name": "n8nLogs",
+      "type": "n8nLogs",
+      "typeVersion": 1,
+      "position": [500, 300],
+      "credentials": {
+        "n8nLogsApi": {
+          "id": "",
+          "name": "n8nLogs API"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "channel": "#alerts",
+        "text": "=:rotating_light: *Workflow Error Detected*\n\n*Workflow:* {{$json.additionalFields.workflowName || 'Unknown'}}\n*Workflow ID:* {{$json.additionalFields.workflowId || 'N/A'}}\n*Execution ID:* {{$json.additionalFields.executionId || 'N/A'}}\n*Error Code:* {{$json.additionalFields.errorCode || 'N/A'}}\n*Message:* {{$json.message}}\n\n*Stack Trace:*\n```{{$json.additionalFields.stackTrace || 'No stack trace available'}}```",
+        "otherOptions": {}
+      },
+      "id": "b2c3d4e5-2222-4bbb-cccc-000000000003",
+      "name": "Slack",
+      "type": "n8n-nodes-base.slack",
+      "typeVersion": 2.2,
+      "position": [750, 300],
+      "credentials": {
+        "slackApi": {
+          "id": "",
+          "name": "Slack API"
+        }
+      }
+    }
+  ],
+  "connections": {
+    "Error Trigger": {
+      "main": [
+        [
+          {
+            "node": "n8nLogs",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "n8nLogs": {
+      "main": [
+        [
+          {
+            "node": "Slack",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "meta": {
+    "templateId": "n8nlogs-error-with-slack-notification",
+    "instanceId": ""
+  },
+  "pinData": {},
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "staticData": null,
+  "tags": [],
+  "triggerCount": 0
+}

@@ -1,0 +1,62 @@
+{
+  "name": "Basic Error Monitoring with n8nLogs",
+  "nodes": [
+    {
+      "parameters": {},
+      "id": "a1b2c3d4-1111-4aaa-bbbb-000000000001",
+      "name": "Error Trigger",
+      "type": "n8n-nodes-base.errorTrigger",
+      "typeVersion": 1,
+      "position": [250, 300]
+    },
+    {
+      "parameters": {
+        "logType": "ERROR",
+        "message": "={{$json.execution.error.message}}",
+        "additionalFields": {
+          "errorCode": "WORKFLOW_ERROR",
+          "workflowId": "={{$json.workflow.id}}",
+          "workflowName": "={{$json.workflow.name}}",
+          "executionId": "={{$json.execution.id}}",
+          "stackTrace": "={{$json.execution.error.stack}}",
+          "includeInputData": true
+        }
+      },
+      "id": "a1b2c3d4-1111-4aaa-bbbb-000000000002",
+      "name": "n8nLogs",
+      "type": "n8nLogs",
+      "typeVersion": 1,
+      "position": [500, 300],
+      "credentials": {
+        "n8nLogsApi": {
+          "id": "",
+          "name": "n8nLogs API"
+        }
+      }
+    }
+  ],
+  "connections": {
+    "Error Trigger": {
+      "main": [
+        [
+          {
+            "node": "n8nLogs",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "meta": {
+    "templateId": "n8nlogs-basic-error-monitoring",
+    "instanceId": ""
+  },
+  "pinData": {},
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "staticData": null,
+  "tags": [],
+  "triggerCount": 0
+}
