@@ -1,6 +1,6 @@
 # n8n-nodes-n8nlogs
 
-n8n community node for sending workflow logs (success/error) to the [n8nLogs](https://n8nlogs.com) monitoring platform.
+n8n community node for sending workflow logs (success/error) to the [WorkflowLogs](https://workflowlogs.com) monitoring platform.
 
 ![n8n](https://img.shields.io/badge/n8n-community--node-ff6d5a)
 ![npm](https://img.shields.io/npm/v/n8n-nodes-n8nlogs)
@@ -25,14 +25,14 @@ Then restart n8n.
 
 ## Setup
 
-1. Sign up at [n8nlogs.com](https://n8nlogs.com) (or your self-hosted instance)
+1. Sign up at [workflowlogs.com](https://workflowlogs.com) (or your self-hosted instance)
 2. Create a project and copy your **API Key**
-3. In n8n, go to **Credentials** > **New** > **n8nLogs API**
-4. Paste your API key and set the Base URL (default: `https://api.n8nlogs.com`)
+3. In n8n, go to **Credentials** > **New** > **WorkflowLogs API**
+4. Paste your API key and set the Base URL (default: `https://api.workflowlogs.com`)
 
-## Node: n8nLogs
+## Node: WorkflowLogs
 
-The **n8nLogs** node sends log entries to your n8nLogs dashboard.
+The **WorkflowLogs** node sends log entries to your WorkflowLogs dashboard.
 
 ### Parameters
 
@@ -59,20 +59,20 @@ The **n8nLogs** node sends log entries to your n8nLogs dashboard.
 
 ### Error Monitoring
 
-Connect the **Error Trigger** node to **n8nLogs** with Log Type set to `ERROR`:
+Connect the **Error Trigger** node to **WorkflowLogs** with Log Type set to `ERROR`:
 
 ```
-[Error Trigger] → [n8nLogs (ERROR)]
+[Error Trigger] → [WorkflowLogs (ERROR)]
 ```
 
 The node automatically captures the error message, workflow details, and execution ID.
 
 ### Success Logging
 
-Add **n8nLogs** at the end of your workflow with Log Type set to `SUCCESS`:
+Add **WorkflowLogs** at the end of your workflow with Log Type set to `SUCCESS`:
 
 ```
-[Your Workflow] → [n8nLogs (SUCCESS)]
+[Your Workflow] → [WorkflowLogs (SUCCESS)]
 ```
 
 ### Error + Slack Notification
@@ -80,7 +80,7 @@ Add **n8nLogs** at the end of your workflow with Log Type set to `SUCCESS`:
 Combine error logging with team notifications:
 
 ```
-[Error Trigger] → [n8nLogs (ERROR)]
+[Error Trigger] → [WorkflowLogs (ERROR)]
                 → [Slack]
 ```
 
@@ -88,18 +88,18 @@ Combine error logging with team notifications:
 
 Ready-to-import workflow templates are available in the [`templates/`](./templates/) directory:
 
-- **basic-error-monitoring.json** — Error Trigger → n8nLogs
-- **success-logging.json** — HTTP Trigger → Process → n8nLogs (SUCCESS)
-- **error-with-slack-notification.json** — Error Trigger → n8nLogs + Slack
+- **basic-error-monitoring.json** — Error Trigger → WorkflowLogs
+- **success-logging.json** — HTTP Trigger → Process → WorkflowLogs (SUCCESS)
+- **error-with-slack-notification.json** — Error Trigger → WorkflowLogs + Slack
 
 Import them in n8n via **Workflows** > **Import from File**.
 
 ## Self-Hosting
 
-If you self-host n8nLogs, change the **Base URL** in the credential settings to point to your instance:
+If you self-host WorkflowLogs, change the **Base URL** in the credential settings to point to your instance:
 
 ```
-https://your-n8nlogs-instance.com
+https://your-workflowlogs-instance.com
 ```
 
 ## Development

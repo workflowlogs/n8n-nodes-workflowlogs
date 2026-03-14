@@ -1,7 +1,7 @@
 {
   "name": "n8n-nodes-n8nlogs",
   "version": "0.2.0",
-  "description": "n8n community node for sending workflow logs (success/error) to n8nLogs monitoring platform",
+  "description": "n8n community node for sending workflow logs (success/error) to WorkflowLogs monitoring platform",
   "keywords": [
     "n8n-community-node-package",
     "n8n",
@@ -11,7 +11,7 @@
   ],
   "license": "MIT",
   "author": {
-    "name": "n8nLogs"
+    "name": "WorkflowLogs"
   },
   "repository": {
     "type": "git",

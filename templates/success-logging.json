@@ -1,5 +1,5 @@
 {
-  "name": "Success Logging with n8nLogs",
+  "name": "Success Logging with WorkflowLogs",
   "nodes": [
     {
       "parameters": {},
@@ -40,7 +40,7 @@
       "credentials": {
         "n8nLogsApi": {
           "id": "",
-          "name": "n8nLogs API"
+          "name": "WorkflowLogs API"
         }
       }
     }

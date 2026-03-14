@@ -2,8 +2,8 @@ import { ICredentialType, INodeProperties } from 'n8n-workflow';
 
 export class N8nLogsApi implements ICredentialType {
   name = 'n8nLogsApi';
-  displayName = 'n8nLogs API';
-  documentationUrl = 'https://n8nlogs.com/docs';
+  displayName = 'WorkflowLogs API';
+  documentationUrl = 'https://workflowlogs.com/docs';
 
   properties: INodeProperties[] = [
     {
@@ -13,14 +13,14 @@ export class N8nLogsApi implements ICredentialType {
       typeOptions: { password: true },
       default: '',
       required: true,
-      description: 'Your n8nLogs project API key. Find it in your project settings at n8nlogs.com.',
+      description: 'Your WorkflowLogs project API key. Find it in your project settings at workflowlogs.com.',
     },
     {
       displayName: 'Base URL',
       name: 'baseUrl',
       type: 'string',
-      default: 'https://api.n8nlogs.com',
-      description: 'The n8nLogs API base URL. Change this only if you self-host n8nLogs.',
+      default: 'https://api.workflowlogs.com',
+      description: 'The WorkflowLogs API base URL. Change this only if you self-host WorkflowLogs.',
     },
   ];
 }

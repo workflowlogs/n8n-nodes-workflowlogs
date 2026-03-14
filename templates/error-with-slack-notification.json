@@ -1,5 +1,5 @@
 {
-  "name": "Error Monitoring with n8nLogs + Slack Notification",
+  "name": "Error Monitoring with WorkflowLogs + Slack Notification",
   "nodes": [
     {
       "parameters": {},
@@ -30,7 +30,7 @@
       "credentials": {
         "n8nLogsApi": {
           "id": "",
-          "name": "n8nLogs API"
+          "name": "WorkflowLogs API"
         }
       }
     },

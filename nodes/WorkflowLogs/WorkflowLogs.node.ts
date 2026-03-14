@@ -9,15 +9,15 @@ import {
 
 export class N8nLogs implements INodeType {
   description: INodeTypeDescription = {
-    displayName: 'n8nLogs',
+    displayName: 'WorkflowLogs',
     name: 'n8nLogs',
     icon: 'file:n8nlogs.svg',
     group: ['output'],
     version: 1,
     subtitle: '={{$parameter["logType"]}} log',
-    description: 'Send workflow logs to n8nLogs monitoring platform',
+    description: 'Send workflow logs to WorkflowLogs monitoring platform',
     defaults: {
-      name: 'n8nLogs',
+      name: 'WorkflowLogs',
     },
     inputs: ['main'],
     outputs: ['main'],
@@ -208,7 +208,7 @@ export class N8nLogs implements INodeType {
         }
         throw new NodeOperationError(this.getNode(), error as Error, {
           itemIndex: i,
-          description: 'Failed to send log to n8nLogs. Check your API key and base URL.',
+          description: 'Failed to send log to WorkflowLogs. Check your API key and base URL.',
         });
       }
     }
