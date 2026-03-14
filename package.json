@@ -28,7 +28,7 @@
     ]
   },
   "scripts": {
-    "build": "tsc",
+    "build": "tsc && cp nodes/WorkflowLogs/*.svg dist/nodes/WorkflowLogs/",
     "dev": "tsc --watch",
     "lint": "eslint nodes/ credentials/ --ext .ts",
     "prepublishOnly": "npm run build",
