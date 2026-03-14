@@ -1,7 +1,7 @@
 import { ICredentialType, INodeProperties } from 'n8n-workflow';
 
-export class N8nLogsApi implements ICredentialType {
-  name = 'n8nLogsApi';
+export class WorkflowLogsApi implements ICredentialType {
+  name = 'workflowLogsApi';
   displayName = 'WorkflowLogs API';
   documentationUrl = 'https://workflowlogs.com/docs';
 

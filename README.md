@@ -1,24 +1,24 @@
-# n8n-nodes-n8nlogs
+# n8n-nodes-workflowlogs
 
 n8n community node for sending workflow logs (success/error) to the [WorkflowLogs](https://workflowlogs.com) monitoring platform.
 
 ![n8n](https://img.shields.io/badge/n8n-community--node-ff6d5a)
-![npm](https://img.shields.io/npm/v/n8n-nodes-n8nlogs)
-![license](https://img.shields.io/npm/l/n8n-nodes-n8nlogs)
+![npm](https://img.shields.io/npm/v/n8n-nodes-workflowlogs)
+![license](https://img.shields.io/npm/l/n8n-nodes-workflowlogs)
 
 ## Installation
 
 ### In n8n Desktop / Self-hosted
 
 1. Open **Settings** > **Community Nodes**
-2. Enter `n8n-nodes-n8nlogs`
+2. Enter `n8n-nodes-workflowlogs`
 3. Click **Install**
 
 ### Via npm (for custom n8n setups)
 
 ```bash
 cd ~/.n8n
-npm install n8n-nodes-n8nlogs
+npm install n8n-nodes-workflowlogs
 ```
 
 Then restart n8n.
@@ -106,8 +106,8 @@ https://your-workflowlogs-instance.com
 
 ```bash
 # Clone the repo
-git clone https://github.com/josephjoberno/n8n-nodes-n8nlogs.git
-cd n8n-nodes-n8nlogs
+git clone https://github.com/josephjoberno/n8n-nodes-workflowlogs.git
+cd n8n-nodes-workflowlogs
 
 # Install dependencies
 npm install

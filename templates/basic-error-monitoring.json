@@ -23,12 +23,12 @@
         }
       },
       "id": "a1b2c3d4-1111-4aaa-bbbb-000000000002",
-      "name": "n8nLogs",
-      "type": "n8nLogs",
+      "name": "workflowLogs",
+      "type": "workflowLogs",
       "typeVersion": 1,
       "position": [500, 300],
       "credentials": {
-        "n8nLogsApi": {
+        "workflowLogsApi": {
           "id": "",
           "name": "WorkflowLogs API"
         }
@@ -40,7 +40,7 @@
       "main": [
         [
           {
-            "node": "n8nLogs",
+            "node": "workflowLogs",
             "type": "main",
             "index": 0
           }
@@ -49,7 +49,7 @@
     }
   },
   "meta": {
-    "templateId": "n8nlogs-basic-error-monitoring",
+    "templateId": "workflowlogs-basic-error-monitoring",
     "instanceId": ""
   },
   "pinData": {},

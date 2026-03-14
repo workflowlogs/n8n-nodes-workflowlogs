@@ -7,11 +7,11 @@ import {
   NodeOperationError,
 } from 'n8n-workflow';
 
-export class N8nLogs implements INodeType {
+export class WorkflowLogs implements INodeType {
   description: INodeTypeDescription = {
     displayName: 'WorkflowLogs',
-    name: 'n8nLogs',
-    icon: 'file:n8nlogs.svg',
+    name: 'workflowLogs',
+    icon: 'file:workflowlogs.svg',
     group: ['output'],
     version: 1,
     subtitle: '={{$parameter["logType"]}} log',
@@ -23,7 +23,7 @@ export class N8nLogs implements INodeType {
     outputs: ['main'],
     credentials: [
       {
-        name: 'n8nLogsApi',
+        name: 'workflowLogsApi',
         required: true,
       },
     ],
@@ -141,7 +141,7 @@ export class N8nLogs implements INodeType {
     const items = this.getInputData();
     const returnData: INodeExecutionData[] = [];
 
-    const credentials = await this.getCredentials('n8nLogsApi');
+    const credentials = await this.getCredentials('workflowLogsApi');
     const baseUrl = (credentials.baseUrl as string).replace(/\/$/, '');
     const apiKey = credentials.apiKey as string;
 
