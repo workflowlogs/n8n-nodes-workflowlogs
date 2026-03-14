@@ -1,5 +1,11 @@
 # Changelog
 
+## [0.3.0](https://github.com/josephjoberno/n8n-nodes-workflowlogs/compare/v0.2.3...v0.3.0) (2026-03-14)
+
+### Features
+
+* add Auto-Detect mode with smart error extraction ([8869b7f](https://github.com/josephjoberno/n8n-nodes-workflowlogs/commit/8869b7f14a2952628331b4afdb57393e921dcad5))
+
 ## [0.2.3](https://github.com/josephjoberno/n8n-nodes-workflowlogs/compare/v0.2.0...v0.2.3) (2026-03-14)
 
 ### Bug Fixes
