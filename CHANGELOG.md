@@ -1,5 +1,11 @@
 # Changelog
 
+## [0.6.1](https://github.com/workflowlogs/n8n-nodes-workflowlogs/compare/v0.6.0...v0.6.1) (2026-03-19)
+
+### Bug Fixes
+
+* **workflowlogs:** normalize ingest base URL and expose API 400 details ([2bddf56](https://github.com/workflowlogs/n8n-nodes-workflowlogs/commit/2bddf5684fef0f09adb8869bc63b317d01ca1ef8))
+
 ## 0.6.0 (2026-03-19)
 
 ### Features
