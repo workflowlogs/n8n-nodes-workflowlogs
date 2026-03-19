@@ -187,12 +187,13 @@ export class WorkflowLogs implements INodeType {
     const returnData: INodeExecutionData[] = [];
 
     const credentials = await this.getCredentials('workflowLogsApi');
-    const baseUrl = (credentials.baseUrl as string).replace(/\/$/, '');
+    const rawBaseUrl = (credentials.baseUrl as string).replace(/\/$/, '');
     const apiKey = credentials.apiKey as string;
+    let ingestUrl = '';
 
     // Validate base URL to prevent SSRF attacks
     try {
-      const parsedUrl = new URL(baseUrl);
+      const parsedUrl = new URL(rawBaseUrl);
       if (!['https:', 'http:'].includes(parsedUrl.protocol)) {
         throw new NodeOperationError(this.getNode(), 'Base URL must use HTTP or HTTPS protocol');
       }
@@ -216,6 +217,12 @@ export class WorkflowLogs implements INodeType {
       if (error instanceof NodeOperationError) throw error;
       throw new NodeOperationError(this.getNode(), 'Invalid Base URL format');
     }
+
+    // Normalize URL so users can provide either:
+    // - https://api.workflowlogs.com
+    // - https://api.workflowlogs.com/api
+    const normalizedBaseUrl = rawBaseUrl.replace(/\/api$/, '');
+    ingestUrl = `${normalizedBaseUrl}/api/logs/ingest`;
 
     // Auto-bind all available metadata from n8n context
     const workflow = this.getWorkflow();
@@ -288,7 +295,7 @@ export class WorkflowLogs implements INodeType {
 
         const response = await this.helpers.httpRequest({
           method: 'POST',
-          url: `${baseUrl}/api/logs/ingest`,
+          url: ingestUrl,
           headers: {
             'Content-Type': 'application/json',
             'X-API-Key': apiKey,
@@ -315,9 +322,36 @@ export class WorkflowLogs implements INodeType {
           });
           continue;
         }
+
+        const errorObj = error as {
+          message?: string;
+          response?: {
+            status?: number;
+            data?: unknown;
+          };
+        };
+        const status = errorObj.response?.status;
+        const responseData = errorObj.response?.data;
+        let responseDetails = '';
+        if (responseData !== undefined) {
+          responseDetails =
+            typeof responseData === 'string'
+              ? responseData
+              : JSON.stringify(responseData);
+          if (responseDetails.length > 500) {
+            responseDetails = `${responseDetails.slice(0, 500)}...`;
+          }
+        }
+
+        const descriptionParts = [
+          'Failed to send log to WorkflowLogs.',
+          status ? `HTTP ${status}.` : '',
+          responseDetails ? `API response: ${responseDetails}` : 'Check your API key and base URL.',
+        ].filter(Boolean);
+
         throw new NodeOperationError(this.getNode(), error as Error, {
           itemIndex: i,
-          description: 'Failed to send log to WorkflowLogs. Check your API key and base URL.',
+          description: descriptionParts.join(' '),
         });
       }
     }
